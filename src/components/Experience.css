@@ -1,0 +1,114 @@
+.experience {
+  background: var(--bg-primary);
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--gradient-1);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+  width: calc(50% - 40px);
+}
+
+.timeline-item:nth-child(odd) {
+  margin-left: 0;
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+  margin-left: auto;
+  text-align: left;
+}
+
+.timeline-dot {
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--accent-primary);
+  border: 4px solid var(--bg-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+.timeline-item:nth-child(odd) .timeline-dot {
+  right: -50px;
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+  left: -50px;
+}
+
+.timeline-content {
+  background: var(--bg-card);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 15px;
+  padding: 25px;
+  transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+  transform: translateY(-5px);
+}
+
+.timeline-year {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--gradient-1);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.timeline-role {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.timeline-company {
+  font-size: 1.1rem;
+  color: var(--accent-primary);
+  margin-bottom: 15px;
+}
+
+.timeline-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 20px;
+  }
+
+  .timeline-item {
+    width: calc(100% - 60px);
+    margin-left: 60px !important;
+    text-align: left !important;
+  }
+
+  .timeline-dot {
+    left: 10px !important;
+  }
+}
