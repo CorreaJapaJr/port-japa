@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { FiGithub, FiLinkedin, FiMapPin } from 'react-icons/fi';
 import { personalInfo } from '../data';
 import './Hero.css';
 
@@ -72,19 +73,62 @@ const Hero = () => {
             </motion.p>
 
             <motion.div
-              className="terminal-box"
+              className="about-section"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
-              <div className="terminal-header">
-                <span className="terminal-dot red"></span>
-                <span className="terminal-dot yellow"></span>
-                <span className="terminal-dot green"></span>
-              </div>
-              <div className="terminal-body">
-                <p><span className="prompt">$</span> sobre_mim</p>
-                <p className="terminal-output">{personalInfo.bio}</p>
+              <div className="about-content">
+                <motion.div
+                  className="about-image"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1 }}
+                >
+                  <div className="image-wrapper">
+                    <img src={personalInfo.avatar} alt={personalInfo.name} />
+                    <div className="image-border"></div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  className="about-text"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1.2 }}
+                >
+                  <p className="about-bio">{personalInfo.bio}</p>
+
+                  <div className="about-info">
+                    <div className="info-item">
+                      <FiMapPin className="info-icon" />
+                      <span>{personalInfo.location}</span>
+                    </div>
+                  </div>
+
+                  <div className="social-links">
+                    <motion.a
+                      href={personalInfo.social.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link"
+                      whileHover={{ scale: 1.1, y: -5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <FiGithub />
+                    </motion.a>
+                    <motion.a
+                      href={personalInfo.social.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link"
+                      whileHover={{ scale: 1.1, y: -5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <FiLinkedin />
+                    </motion.a>
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
           </motion.div>

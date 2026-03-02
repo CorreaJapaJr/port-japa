@@ -29,7 +29,6 @@ export const skills = {
   tools: [
     { name: "Git", icon: "FaGitAlt" },
     { name: "GitHub", icon: "FaGithub" },
-    { name: "Kiro", icon: "Kiro" },
     { name: "npm", icon: "FaNpm" },
   ],
   other: [
@@ -70,25 +69,11 @@ export const projects = [
 ];
 
 export const experience = [
-  {
-    id: 1,
-    year: "2023 - Presente",
-    role: "Front-end Developer Sênior",
-    company: "Tech Company",
-    description: "Desenvolvimento de aplicações web escaláveis usando React e TypeScript. Liderança técnica e mentoria de desenvolvedores júnior.",
-  },
-  {
-    id: 2,
-    year: "2021 - 2023",
-    role: "Front-end Developer",
-    company: "Startup Inovadora",
-    description: "Criação de interfaces responsivas e implementação de design systems. Trabalho com metodologias ágeis e integração contínua.",
-  },
-  {
-    id: 3,
-    year: "2019 - 2021",
-    role: "Desenvolvedor Web Júnior",
-    company: "Agência Digital",
-    description: "Desenvolvimento de websites e landing pages para diversos clientes. Aprendizado de boas práticas e padrões de código.",
-  },
+{
+  id: 1,
+  year: "2024 - Presente",
+  role: "Front-end Developer Junior",
+  company: "Web Jasper",
+  description: "Desenvolvimento de aplicações web responsivas utilizando Vue.js e TypeScript, com foco em componentização, boas práticas de código e integração com APIs RESTful.",
+}
 ];

@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
-import { FiGithub, FiLinkedin, FiMapPin, FiTwitter } from 'react-icons/fi'
-import { personalInfo } from '../data'
-import './About.css'
+import { motion } from 'framer-motion';
+import { FiGithub, FiLinkedin, FiMapPin, FiTwitter } from 'react-icons/fi';
+import { personalInfo } from '../data';
+import './About.css';
 
 const About = () => {
   return (
@@ -14,8 +14,8 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Sobre Mim</h2>
-          <div className="title-underline"></div>
+
+
         </motion.div>
 
         <div className="about-content">

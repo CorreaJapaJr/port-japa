@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { FiMail, FiPhone, FiSend } from 'react-icons/fi';
+import { FiAlertCircle, FiCheck, FiMail, FiPhone, FiSend } from 'react-icons/fi';
 import { personalInfo } from '../data';
 import './Contact.css';
 
@@ -10,20 +10,106 @@ const Contact = () => {
     email: '',
     message: ''
   })
+  const [isLoading, setIsLoading] = useState(false)
+  const [status, setStatus] = useState({ type: '', message: '' })
+  const [errors, setErrors] = useState({})
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    const newErrors = {}
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Nome é obrigatório'
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Nome deve ter pelo menos 2 caracteres'
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'E-mail é obrigatório'
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'E-mail inválido'
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Mensagem é obrigatória'
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Mensagem deve ter pelo menos 10 caracteres'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+    // Limpa o erro do campo quando o usuário começa a digitar
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }))
+    }
+    // Limpa mensagem de status
+    if (status.message) {
+      setStatus({ type: '', message: '' })
+    }
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Implementar lógica de envio (ex: EmailJS, FormSpree, etc)
-    console.log('Form submitted:', formData)
-    alert('Mensagem enviada com sucesso!')
-    setFormData({ name: '', email: '', message: '' })
+
+    if (!validateForm()) {
+      setStatus({
+        type: 'error',
+        message: 'Por favor, corrija os erros no formulário'
+      })
+      return
+    }
+
+    setIsLoading(true)
+    setStatus({ type: '', message: '' })
+
+    try {
+      // Simula envio de e-mail (substitua com EmailJS ou sua API)
+      await new Promise(resolve => setTimeout(resolve, 1500))
+
+      // Para usar EmailJS, descomente e configure:
+      /*
+      const emailjs = (await import('emailjs-com')).default
+      await emailjs.send(
+        'YOUR_SERVICE_ID',
+        'YOUR_TEMPLATE_ID',
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_name: 'Reginaldo'
+        },
+        'YOUR_PUBLIC_KEY'
+      )
+      */
+
+      setStatus({
+        type: 'success',
+        message: '✨ Mensagem enviada com sucesso! Entrarei em contato em breve.'
+      })
+      setFormData({ name: '', email: '', message: '' })
+    } catch (error) {
+      console.error('Erro ao enviar:', error)
+      setStatus({
+        type: 'error',
+        message: '❌ Erro ao enviar mensagem. Tente novamente ou entre em contato diretamente.'
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -36,8 +122,7 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Entre em Contato</h2>
-          <div className="title-underline"></div>
+
         </motion.div>
 
         <div className="contact-content">
@@ -74,47 +159,77 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
+            {status.message && (
+              <motion.div
+                className={`form-status ${status.type}`}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                {status.type === 'success' ? <FiCheck /> : <FiAlertCircle />}
+                <span>{status.message}</span>
+              </motion.div>
+            )}
+
             <div className="form-group">
+              <label htmlFor="name">Nome</label>
               <input
                 type="text"
+                id="name"
                 name="name"
-                placeholder="Reginaldo da Rosa Correa Junior"
+                placeholder="Digite seu nome completo"
                 value={formData.name}
                 onChange={handleChange}
-                required
+                className={errors.name ? 'error' : ''}
               />
+              {errors.name && <span className="error-message">{errors.name}</span>}
             </div>
 
             <div className="form-group">
+              <label htmlFor="email">E-mail</label>
               <input
                 type="email"
+                id="email"
                 name="email"
-                placeholder="Seu Email"
+                placeholder="seu@email.com"
                 value={formData.email}
                 onChange={handleChange}
-                required
+                className={errors.email ? 'error' : ''}
               />
+              {errors.email && <span className="error-message">{errors.email}</span>}
             </div>
 
             <div className="form-group">
+              <label htmlFor="message">Mensagem</label>
               <textarea
+                id="message"
                 name="message"
-                placeholder="Sua Mensagem"
-                rows="6"
+                placeholder="Conte-me sobre seu projeto ou ideia..."
+                rows="5"
                 value={formData.message}
                 onChange={handleChange}
-                required
+                className={errors.message ? 'error' : ''}
               ></textarea>
+              {errors.message && <span className="error-message">{errors.message}</span>}
+              <span className="char-count">{formData.message.length} caracteres</span>
             </div>
 
-            <motion.button
+            <button
               type="submit"
-              className="btn btn-primary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="btn btn-primary submit-btn"
+              disabled={isLoading}
             >
-              <FiSend /> Enviar Mensagem
-            </motion.button>
+              {isLoading ? (
+                <>
+                  <span className="spinner"></span>
+                  Enviando...
+                </>
+              ) : (
+                <>
+                  <FiSend />
+                  Enviar Mensagem
+                </>
+              )}
+            </button>
           </motion.form>
         </div>
       </div>

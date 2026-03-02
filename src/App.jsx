@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import About from './components/About'
 import Contact from './components/Contact'
 import Experience from './components/Experience'
 import Footer from './components/Footer'
@@ -29,7 +28,6 @@ function App() {
     <div className="app">
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <Hero />
-      <About />
       <Skills />
       <Projects />
       <Experience />
