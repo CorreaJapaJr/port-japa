@@ -7,18 +7,13 @@
 }
 
 .cursor-glow {
-  position: fixed;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+  display: none;
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 .hero-main {
@@ -26,142 +21,117 @@
 }
 
 .glitch-wrapper {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .hero-name {
-  font-size: clamp(3rem, 10vw, 7rem);
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 0.9;
-  position: relative;
-  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: clamp(1.5rem, 5vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
   color: var(--text-primary);
   text-transform: uppercase;
+  text-shadow: var(--shadow-glow);
 }
 
 .hero-name::before,
 .hero-name::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.8;
-}
-
-.hero-name::before {
-  animation: glitch-1 2.5s infinite;
-  color: var(--accent-primary);
-  z-index: -1;
-}
-
-.hero-name::after {
-  animation: glitch-2 2.5s infinite;
-  color: var(--accent-secondary);
-  z-index: -2;
-}
-
-@keyframes glitch-1 {
-  0%, 100% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-}
-
-@keyframes glitch-2 {
-  0%, 100% { transform: translate(0); }
-  20% { transform: translate(2px, -2px); }
-  40% { transform: translate(2px, 2px); }
-  60% { transform: translate(-2px, -2px); }
-  80% { transform: translate(-2px, 2px); }
+  display: none;
 }
 
 .role-container {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 40px;
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  font-weight: 300;
-  font-family: 'Courier New', monospace;
+  gap: 12px;
+  margin-bottom: 32px;
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 3vw, 1.5rem);
 }
 
 .role-prefix {
-  color: var(--text-secondary);
-  opacity: 0.5;
+  color: var(--accent-secondary);
+  opacity: 0.8;
 }
 
 .role-text {
   color: var(--accent-primary);
-  font-weight: 500;
+}
+
+.role-text::after {
+  content: '_';
+  animation: blink 1s step-end infinite;
 }
 
 .hero-bio {
-  font-size: 1.3rem;
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 50px;
+  line-height: 1.8;
+  margin-bottom: 40px;
   max-width: 600px;
-  font-weight: 300;
+  border-left: 3px solid var(--accent-primary);
+  padding-left: 16px;
 }
 
+/* Terminal box */
 .terminal-box {
   background: var(--bg-card);
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  border-radius: 12px;
+  border: var(--border);
+  border-radius: 0;
   overflow: hidden;
-  max-width: 700px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  max-width: 680px;
+  box-shadow: 4px 4px 0 var(--accent-primary);
 }
 
 .terminal-header {
-  background: rgba(139, 92, 246, 0.1);
-  padding: 12px 20px;
+  background: var(--accent-primary);
+  padding: 8px 16px;
   display: flex;
   gap: 8px;
-  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+  align-items: center;
+}
+
+.terminal-header::before {
+  content: '[ TERMINAL ]';
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  color: #000;
+  letter-spacing: 2px;
 }
 
 .terminal-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+  display: none;
 }
 
-.terminal-dot.red { background: #ff5f56; }
-.terminal-dot.yellow { background: #ffbd2e; }
-.terminal-dot.green { background: #27c93f; }
-
 .terminal-body {
-  padding: 25px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.95rem;
+  padding: 20px;
+  font-family: var(--font-mono);
+  font-size: 1rem;
   line-height: 1.8;
 }
 
 .prompt {
-  color: var(--accent-primary);
-  margin-right: 10px;
+  color: var(--accent-secondary);
+  margin-right: 8px;
   font-weight: bold;
 }
 
 .terminal-output {
   color: var(--text-secondary);
-  margin-top: 10px;
-  padding-left: 20px;
+  margin-top: 8px;
+  padding-left: 16px;
 }
 
+/* About section */
 .about-section {
   margin-top: 60px;
 }
 
 .about-content {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 50px;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
   align-items: center;
 }
 
@@ -171,27 +141,29 @@
 
 .image-wrapper {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 280px;
+  height: 280px;
 }
 
 .image-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 20px;
+  border-radius: 0;
   position: relative;
   z-index: 2;
+  filter: grayscale(30%) contrast(1.1);
+  image-rendering: pixelated;
 }
 
 .image-border {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 8px;
+  left: 8px;
   width: 100%;
   height: 100%;
-  border: 3px solid var(--accent-primary);
-  border-radius: 20px;
+  border: var(--border);
+  border-radius: 0;
   z-index: 1;
 }
 
@@ -200,79 +172,73 @@
 }
 
 .about-bio {
-  font-size: 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
   line-height: 1.8;
   color: var(--text-secondary);
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .about-info {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .info-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
   color: var(--text-secondary);
 }
 
 .info-icon {
   color: var(--accent-primary);
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .social-links {
   display: flex;
-  gap: 20px;
+  gap: 16px;
 }
 
 .social-link {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 2px solid var(--accent-primary);
+  width: 44px;
+  height: 44px;
+  border-radius: 0;
+  background: transparent;
+  border: var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: var(--accent-primary);
-  transition: all 0.3s ease;
+  transition: all 0.2s;
 }
 
 .social-link:hover {
   background: var(--accent-primary);
-  color: white;
-  box-shadow: var(--shadow-glow);
+  color: #000;
+  box-shadow: 3px 3px 0 #8a7010;
 }
 
 @media (max-width: 768px) {
   .hero-name {
-    font-size: clamp(2.5rem, 12vw, 4rem);
+    font-size: clamp(1.2rem, 6vw, 2rem);
   }
-
-  .role-container {
-    font-size: 1.5rem;
-  }
-
   .hero-bio {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
   }
-
   .terminal-body {
     font-size: 0.85rem;
-    padding: 20px;
+    padding: 16px;
   }
-
   .about-content {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 24px;
   }
-
   .image-wrapper {
-    width: 250px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
   }
 }
