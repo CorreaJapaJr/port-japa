@@ -1,18 +1,44 @@
 import { motion } from 'framer-motion'
-import { FaCss3Alt, FaFigma, FaGitAlt, FaGithub, FaHtml5, FaJs, FaNode, FaNpm, FaReact, FaSass, FaVuejs } from 'react-icons/fa'
-import { SiTailwindcss, SiTypescript, SiWebpack } from 'react-icons/si'
+import { FaCertificate, FaCss3Alt, FaGitAlt, FaGithub, FaHtml5, FaJs, FaNpm, FaReact, FaVuejs } from 'react-icons/fa'
+import { SiTypescript } from 'react-icons/si'
 import { skills } from '../data'
 import './Skills.css'
 
 const iconMap = {
   FaHtml5, FaCss3Alt, FaJs, FaReact, FaVuejs, SiTypescript,
-  FaGitAlt, FaGithub, FaFigma, FaNpm,
-  FaNode, FaSass, SiTailwindcss, SiWebpack
+  FaGitAlt, FaGithub, FaNpm, FaCertificate
 }
 
 const Skills = () => {
   const renderSkillCard = (skill, index) => {
     const Icon = iconMap[skill.icon]
+    const content = (
+      <>
+        <div className="skill-icon">
+          {Icon && <Icon />}
+        </div>
+        <span className="skill-name">{skill.name}</span>
+      </>
+    )
+
+    if (skill.link) {
+      return (
+        <motion.a
+          key={skill.name}
+          href={skill.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="skill-card certificate-link"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          whileHover={{ y: -10, scale: 1.05 }}
+        >
+          {content}
+        </motion.a>
+      )
+    }
 
     return (
       <motion.div
@@ -24,10 +50,7 @@ const Skills = () => {
         transition={{ duration: 0.5, delay: index * 0.1 }}
         whileHover={{ y: -10, scale: 1.05 }}
       >
-        <div className="skill-icon">
-          {Icon && <Icon />}
-        </div>
-        <span className="skill-name">{skill.name}</span>
+        {content}
       </motion.div>
     )
   }
@@ -55,18 +78,14 @@ const Skills = () => {
           </div>
 
           <div className="skills-category">
-            <h3 className="category-title">Ferramentas</h3>
+            <h3 className="category-title">Cursos</h3>
             <div className="skills-grid">
-              {skills.tools.map((skill, index) => renderSkillCard(skill, index))}
+              {skills.courses.map((skill, index) => renderSkillCard(skill, index))}
             </div>
+            <p className='certificate-link'>Clique no card para ver o certificado</p>
           </div>
 
-          <div className="skills-category">
-            <h3 className="category-title">Outras Tecnologias</h3>
-            <div className="skills-grid">
-              {skills.other.map((skill, index) => renderSkillCard(skill, index))}
-            </div>
-          </div>
+     
         </div>
       </div>
     </section>

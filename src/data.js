@@ -12,7 +12,7 @@ export const personalInfo = {
   cvLink: "/cv.pdf",
   social: {
     github: "https://github.com/CorreaJapaJr",
-    linkedin: "https://linkedin.com/in/seuusuario",
+    linkedin: "https://www.linkedin.com/in/reginaldo-da-rosa-correa-junior-190799218/",
 
   }
 };
@@ -26,10 +26,9 @@ export const skills = {
     { name: "Vue.js", icon: "FaVuejs" },
     { name: "TypeScript", icon: "SiTypescript" },
   ],
-  tools: [
-    { name: "Git", icon: "FaGitAlt" },
-    { name: "GitHub", icon: "FaGithub" },
-    { name: "npm", icon: "FaNpm" },
+  courses: [
+    { name: "Fullstack", icon: "FaCertificate", link: "https://app.rocketseat.com.br/certificates/7ca13a09-18fc-470c-a90a-6f66560eb540" },
+    { name: "React", icon: "FaCertificate", link: "https://app.rocketseat.com.br/certificates/5bea852b-d234-45cf-bd7a-15ef0d6999f1" },
   ],
   other: [
     { name: "Node.js", icon: "FaNode" },
@@ -41,30 +40,30 @@ export const skills = {
 export const projects = [
   {
     id: 1,
-    title: "loja online experimental",
-    description: "testei criar um e-commerce do zero. tem carrinho, checkout, integração com stripe. aprendi muito sobre estado global e otimização de performance.",
-    image: "https://via.placeholder.com/600x400",
-    tags: ["react", "typescript", "stripe", "zustand"],
-    github: "https://github.com/seuusuario/projeto1",
-    demo: "https://projeto1.vercel.app",
+    title: "Pokédevs",
+    description: "Uma galeria interativa e divertida que apresenta 'Pokédevs' – criaturas inspiradas no mundo do desenvolvimento com habilidades e atributos únicos.",
+    image: "/pokedevs.png",
+    tags: ["HTML5", "CSS3", "JavaScript"],
+    github: "https://github.com/CorreaJapaJr/pokedevs",
+    demo: "https://correajapajr.github.io/pokedevs/",
   },
   {
     id: 2,
-    title: "dashboard de dados",
-    description: "criei um dashboard para visualizar dados em tempo real. foi desafiador fazer os gráficos performarem bem com muita informação.",
-    image: "https://via.placeholder.com/600x400",
-    tags: ["vue", "d3.js", "websockets"],
-    github: "https://github.com/seuusuario/projeto2",
-    demo: "https://projeto2.vercel.app",
+    title: "Bike Japa",
+    description: "Landing page profissional para e-commerce de bicicletas elétricas personalizadas, com foco em design premium e experiência do usuário.",
+    image: "/bikejapa.png",
+    tags: ["HTML5", "CSS3", "Design Responsivo"],
+    github: "https://github.com/CorreaJapaJr/bikejapa",
+    demo: "https://correajapajr.github.io/bikejapa/",
   },
   {
     id: 3,
-    title: "gerenciador de tarefas",
-    description: "app de tarefas com drag-and-drop. foquei em fazer a UX ser realmente fluida e intuitiva.",
-    image: "https://via.placeholder.com/600x400",
-    tags: ["react", "framer-motion", "dnd-kit"],
-    github: "https://github.com/seuusuario/projeto3",
-    demo: "https://projeto3.vercel.app",
+    title: "Listas Vue",
+    description: "Aplicação dinâmica de gerenciamento de tarefas com uma interface retrô e responsiva, permitindo organização eficiente no dia a dia.",
+    image: "/listasvue.png",
+    tags: ["Vue.js", "CSS3", "Retro UI"],
+    github: "https://github.com/CorreaJapaJr/listas-vue",
+    demo: "https://listas-vue.vercel.app/",
   },
 ];
 
