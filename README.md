@@ -46,6 +46,18 @@ Para adicionar um projeto: coloque a imagem em `src/assets/`, importe no topo de
 
 O `vite.config.js` usa `base: './'`, então os caminhos dos assets são relativos. Isso significa que o conteúdo de `dist/` funciona tanto na raiz de um domínio quanto em um caminho como `/port-japa/`.
 
+### GitHub Pages
+
+Existe um workflow em `.github/workflows/deploy-pages.yml` que faz build e publica a pasta `dist/` a cada push em `main`.
+
+Antes do primeiro deploy, entre em **Settings → Pages → Build and deployment** e selecione **Source: GitHub Actions**. Depois disso, é só dar push:
+
+```bash
+git push origin main
+```
+
+### Outros hosts
+
 ```bash
 npm run build
 # publique o conteúdo da pasta dist/
