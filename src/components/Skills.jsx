@@ -1,95 +1,60 @@
-import { motion } from 'framer-motion'
-import { FaCertificate, FaCss3Alt, FaGitAlt, FaGithub, FaHtml5, FaJs, FaNpm, FaReact, FaVuejs } from 'react-icons/fa'
-import { SiTypescript } from 'react-icons/si'
+import { FaCertificate } from 'react-icons/fa6'
+
 import { skills } from '../data'
+import SectionHeader from './SectionHeader'
 import './Skills.css'
 
-const iconMap = {
-  FaHtml5, FaCss3Alt, FaJs, FaReact, FaVuejs, SiTypescript,
-  FaGitAlt, FaGithub, FaNpm, FaCertificate
+function SkillGroup({ title, items }) {
+  return (
+    <div className='skill-group card'>
+      <h3>{title}</h3>
+      <div className='chip-list'>
+        {items.map(({ name, Icon }) => (
+          <span className='skill-chip' key={name}>
+            <Icon aria-hidden='true' />
+            {name}
+          </span>
+        ))}
+      </div>
+    </div>
+  )
 }
 
-const Skills = () => {
-  const renderSkillCard = (skill, index) => {
-    const Icon = iconMap[skill.icon]
-    const content = (
-      <>
-        <div className="skill-icon">
-          {Icon && <Icon />}
-        </div>
-        <span className="skill-name">{skill.name}</span>
-      </>
-    )
-
-    if (skill.link) {
-      return (
-        <motion.a
-          key={skill.name}
-          href={skill.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="skill-card certificate-link"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-          whileHover={{ y: -10, scale: 1.05 }}
-        >
-          {content}
-        </motion.a>
-      )
-    }
-
-    return (
-      <motion.div
-        key={skill.name}
-        className="skill-card"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        whileHover={{ y: -10, scale: 1.05 }}
-      >
-        {content}
-      </motion.div>
-    )
-  }
-
+export default function Skills() {
   return (
-    <section id="skills" className="skills">
-      <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="section-title">Habilidades</h2>
-          <div className="title-underline"></div>
-        </motion.div>
+    <section className='section skills' id='skills' aria-labelledby='skills-title'>
+      <div className='container'>
+        <SectionHeader
+          id='skills-title'
+          number='03'
+          eyebrow='Skills'
+          title='Ferramentas do dia a dia'
+          description='Tecnologias que uso para tirar ideias do papel e manter os projetos evoluindo.'
+        />
 
-        <div className="skills-content">
-          <div className="skills-category">
-            <h3 className="category-title">Front-end</h3>
-            <div className="skills-grid">
-              {skills.frontend.map((skill, index) => renderSkillCard(skill, index))}
-            </div>
+        <div className='skills-grid'>
+          <SkillGroup title='Front-end' items={skills.core} />
+          <SkillGroup title='Ferramentas' items={skills.tools} />
+        </div>
+
+        <div className='certificates'>
+          <div>
+            <h3>Certificações</h3>
+            <p>Estudos que complementam a prática e renderam certificados.</p>
           </div>
-
-          <div className="skills-category">
-            <h3 className="category-title">Cursos</h3>
-            <div className="skills-grid">
-              {skills.courses.map((skill, index) => renderSkillCard(skill, index))}
-            </div>
-            <p className='certificate-link'>Clique no card para ver o certificado</p>
-          </div>
-
-     
+          <ul>
+            {skills.certificates.map(({ name, href }) => (
+              <li key={name}>
+                <a href={href} target='_blank' rel='noreferrer'>
+                  <FaCertificate aria-hidden='true' />
+                  {name}
+                  <span aria-hidden='true'>↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
   )
 }
-
-export default Skills

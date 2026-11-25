@@ -1,78 +1,118 @@
-// Centralize todos os dados do portfólio aqui para fácil edição
+import { FaCss3Alt, FaHtml5, FaJs, FaNodeJs, FaReact, FaVuejs } from 'react-icons/fa'
+import { FaCertificate, FaGithub, FaLinkedinIn } from 'react-icons/fa6'
+import { FiMail } from 'react-icons/fi'
+import { SiSass, SiTailwindcss, SiTypescript } from 'react-icons/si'
+
+import avatar from './assets/me.jpeg'
+import bikejapa from './assets/bikejapa.png'
+import listasvue from './assets/listasvue.png'
+import pokedevs from './assets/pokedevs.png'
 
 export const personalInfo = {
-  name: "Reginaldo da Rosa Correa Junior",
-  role: "Front-end Developer",
-  tagline: "construo interfaces que as pessoas realmente querem usar",
-  location: "Imaruí/SC, Brasil",
-  email: "reginaldodarosacorreajr@gmail.com",
-  phone: "+55 48 996151778",
-  bio: "dev front-end que gosta de experimentar, quebrar coisas e aprender no processo. especializado em react e vuejs, typescript e fazer as coisas funcionarem de verdade.",
-  avatar: "/me.jpeg",
-  cvLink: "/cv.pdf",
-  social: {
-    github: "https://github.com/CorreaJapaJr",
-    linkedin: "https://www.linkedin.com/in/reginaldo-da-rosa-correa-junior-190799218/",
-
-  }
-};
+  name: 'Reginaldo da Rosa Correa Junior',
+  shortName: 'Reginaldo Correa',
+  role: 'Front-end Developer',
+  location: 'Imaruí, SC — Brasil',
+  availability: 'Disponível para novos projetos',
+  email: 'reginaldodarosacorreajr@gmail.com',
+  phone: '+55 48 99615-1778',
+  phoneHref: 'tel:+5548996151778',
+  bio: 'Desenvolvedor front-end que gosta de transformar ideias em interfaces claras, rápidas e fáceis de usar. Trabalho principalmente com React, Vue.js e TypeScript.',
+  avatar,
+  social: [
+    { label: 'GitHub', href: 'https://github.com/CorreaJapaJr', Icon: FaGithub },
+    {
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/reginaldo-da-rosa-correa-junior-190799218/',
+      Icon: FaLinkedinIn,
+    },
+    {
+      label: 'E-mail',
+      href: 'mailto:reginaldodarosacorreajr@gmail.com',
+      Icon: FiMail,
+    },
+  ],
+}
 
 export const skills = {
-  frontend: [
-    { name: "HTML5", icon: "FaHtml5" },
-    { name: "CSS3", icon: "FaCss3Alt" },
-    { name: "JavaScript", icon: "FaJs" },
-    { name: "React", icon: "FaReact" },
-    { name: "Vue.js", icon: "FaVuejs" },
-    { name: "TypeScript", icon: "SiTypescript" },
+  core: [
+    { name: 'JavaScript', Icon: FaJs },
+    { name: 'TypeScript', Icon: SiTypescript },
+    { name: 'React', Icon: FaReact },
+    { name: 'Vue.js', Icon: FaVuejs },
+    { name: 'HTML5', Icon: FaHtml5 },
+    { name: 'CSS3', Icon: FaCss3Alt },
   ],
-  courses: [
-    { name: "Fullstack", icon: "FaCertificate", link: "https://app.rocketseat.com.br/certificates/7ca13a09-18fc-470c-a90a-6f66560eb540" },
-    { name: "React", icon: "FaCertificate", link: "https://app.rocketseat.com.br/certificates/5bea852b-d234-45cf-bd7a-15ef0d6999f1" },
+  tools: [
+    { name: 'Node.js', Icon: FaNodeJs },
+    { name: 'Sass', Icon: SiSass },
+    { name: 'Tailwind CSS', Icon: SiTailwindcss },
   ],
-  other: [
-    { name: "Node.js", icon: "FaNode" },
-    { name: "Sass", icon: "FaSass" },
-    { name: "Tailwind", icon: "SiTailwindcss" },
-  ]
-};
+  certificates: [
+    {
+      name: 'Fullstack',
+      href: 'https://app.rocketseat.com.br/certificates/7ca13a09-18fc-470c-a90a-6f66560eb540',
+    },
+    {
+      name: 'React',
+      href: 'https://app.rocketseat.com.br/certificates/5bea852b-d234-45cf-bd7a-15ef0d6999f1',
+    },
+  ],
+}
 
 export const projects = [
   {
     id: 1,
-    title: "Pokédevs",
-    description: "Uma galeria interativa e divertida que apresenta 'Pokédevs' – criaturas inspiradas no mundo do desenvolvimento com habilidades e atributos únicos.",
-    image: "/pokedevs.png",
-    tags: ["HTML5", "CSS3", "JavaScript"],
-    github: "https://github.com/CorreaJapaJr/pokedevs",
-    demo: "https://correajapajr.github.io/pokedevs/",
+    title: 'Pokédevs',
+    category: 'Galeria interativa',
+    description:
+      'Uma galeria de criaturas inspiradas no mundo da programação, com personagens, habilidades e uma interface divertida de explorar.',
+    image: pokedevs,
+    tags: ['HTML5', 'CSS3', 'JavaScript'],
+    github: 'https://github.com/CorreaJapaJr/pokedevs',
+    demo: 'https://correajapajr.github.io/pokedevs/',
   },
   {
     id: 2,
-    title: "Bike Japa",
-    description: "Landing page profissional para e-commerce de bicicletas elétricas personalizadas, com foco em design premium e experiência do usuário.",
-    image: "/bikejapa.png",
-    tags: ["HTML5", "CSS3", "Design Responsivo"],
-    github: "https://github.com/CorreaJapaJr/bikejapa",
-    demo: "https://correajapajr.github.io/bikejapa/",
+    title: 'Bike Japa',
+    category: 'Landing page',
+    description:
+      'Página de vendas para bicicletas elétricas personalizadas, com foco em hierarquia visual, responsividade e chamadas para ação.',
+    image: bikejapa,
+    tags: ['HTML5', 'CSS3', 'Responsivo'],
+    github: 'https://github.com/CorreaJapaJr/bikejapa',
+    demo: 'https://correajapajr.github.io/bikejapa/',
   },
   {
     id: 3,
-    title: "Listas Vue",
-    description: "Aplicação dinâmica de gerenciamento de tarefas com uma interface retrô e responsiva, permitindo organização eficiente no dia a dia.",
-    image: "/listasvue.png",
-    tags: ["Vue.js", "CSS3", "Retro UI"],
-    github: "https://github.com/CorreaJapaJr/listas-vue",
-    demo: "https://listas-vue.vercel.app/",
+    title: 'Listas Vue',
+    category: 'Produtividade',
+    description:
+      'Aplicativo de listas e tarefas com interface retrô, criação e organização de itens e layout adaptado para celular.',
+    image: listasvue,
+    tags: ['Vue.js', 'CSS3', 'LocalStorage'],
+    github: 'https://github.com/CorreaJapaJr/listas-vue',
+    demo: 'https://listas-vue.vercel.app/',
   },
-];
+]
 
 export const experience = [
-{
-  id: 1,
-  year: "2024 - Presente",
-  role: "Front-end Developer Junior",
-  company: "Web Jasper",
-  description: "Desenvolvimento de aplicações web responsivas utilizando Vue.js e TypeScript, com foco em componentização, boas práticas de código e integração com APIs RESTful.",
-}
-];
+  {
+    id: 1,
+    year: '2024 — hoje',
+    role: 'Front-end Developer Junior',
+    company: 'Web Jasper',
+    description:
+      'Desenvolvimento de interfaces web responsivas com Vue.js e TypeScript, componentização de UI e integração com APIs REST.',
+    tags: ['Vue.js', 'TypeScript', 'APIs REST'],
+  },
+  {
+    id: 2,
+    year: 'Cursos',
+    role: 'Formação contínua',
+    company: 'Rocketseat',
+    description:
+      'Trilhas de Fullstack e React, com prática em projetos, componentes, state management e boas práticas de desenvolvimento web.',
+    tags: ['React', 'Fullstack', 'Certificados'],
+  },
+]

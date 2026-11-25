@@ -1,120 +1,67 @@
-import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { FiMenu, FiX } from 'react-icons/fi'
+
 import './Navbar.css'
 
-const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+const links = [
+  { href: '#about', label: 'Sobre' },
+  { href: '#projects', label: 'Projetos' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#experience', label: 'Experiência' },
+  { href: '#contact', label: 'Contato' },
+]
 
-  const navItems = [
-    { id: 'home', label: 'Início' },
-    { id: 'about', label: 'Sobre' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'projects', label: 'Projetos' },
-    { id: 'experience', label: 'Experiência' },
-    { id: 'contact', label: 'Contato' },
-  ]
+export default function Navbar() {
+  const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-
-      // Detectar seção ativa
-      const sections = navItems.map(item => document.getElementById(item.id))
-      const scrollPosition = window.scrollY + 200
-
-      sections.forEach((section, index) => {
-        if (section) {
-          const top = section.offsetTop
-          const bottom = top + section.offsetHeight
-          if (scrollPosition >= top && scrollPosition < bottom) {
-            setActiveSection(navItems[index].id)
-          }
-        }
-      })
-    }
-
-    window.addEventListener('scroll', handleScroll)
+    const handleScroll = () => setScrolled(window.scrollY > 24)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollToSection = id => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setMobileMenuOpen(false)
+  useEffect(() => {
+    const handleKey = (event) => {
+      if (event.key === 'Escape') setOpen(false)
     }
-  }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [])
 
   return (
-    <motion.nav
-      className={`navbar ${scrolled ? 'scrolled' : ''}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className='navbar-container'>
-        <motion.div
-          className='navbar-logo'
-          whileHover={{ scale: 1.05 }}
-        >
-          <span className='logo-text'>&lt;Dev/&gt;</span>
-        </motion.div>
+    <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
+      <nav className='container nav' aria-label='Navegação principal'>
+        <a className='brand' href='#top' aria-label='Voltar ao início'>
+          RC<span>.</span>
+        </a>
 
-        {/* Desktop Menu */}
-        <ul className='navbar-menu desktop-menu'>
-          {navItems.map(item => (
-            <li key={item.id}>
-              <button
-                onClick={() => scrollToSection(item.id)}
-                className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
-              >
-                {item.label}
-              </button>
+        <ul className={`nav-links${open ? ' is-open' : ''}`} id='mobile-menu'>
+          {links.map((link) => (
+            <li key={link.href}>
+              <a href={link.href} onClick={() => setOpen(false)}>
+                {link.label}
+              </a>
             </li>
           ))}
         </ul>
 
-        <div className='navbar-actions'>
-          <button
-            className='mobile-menu-toggle'
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <FiX /> : <FiMenu />}
-          </button>
-        </div>
-      </div>
+        <a className='nav-cta' href='#contact'>
+          Vamos conversar
+        </a>
 
-      {/* Mobile Menu */}
-      <motion.div
-        className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}
-        initial={{ opacity: 0, x: '100%' }}
-        animate={{
-          opacity: mobileMenuOpen ? 1 : 0,
-          x: mobileMenuOpen ? 0 : '100%',
-        }}
-        transition={{ duration: 0.3 }}
-      >
-        <ul>
-          {navItems.map(item => (
-            <motion.li
-              key={item.id}
-              whileHover={{ x: 10 }}
-            >
-              <button
-                onClick={() => scrollToSection(item.id)}
-                className={activeSection === item.id ? 'active' : ''}
-              >
-                {item.label}
-              </button>
-            </motion.li>
-          ))}
-        </ul>
-      </motion.div>
-    </motion.nav>
+        <button
+          type='button'
+          className='menu-toggle'
+          aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={open}
+          aria-controls='mobile-menu'
+          onClick={() => setOpen((current) => !current)}
+        >
+          {open ? <FiX size={22} /> : <FiMenu size={22} />}
+        </button>
+      </nav>
+    </header>
   )
 }
-
-export default Navbar

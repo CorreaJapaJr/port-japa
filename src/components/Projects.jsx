@@ -1,77 +1,64 @@
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { FiCode, FiExternalLink, FiGithub } from 'react-icons/fi'
+import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
+
 import { projects } from '../data'
+import SectionHeader from './SectionHeader'
 import './Projects.css'
 
-const Projects = () => {
-  const [hoveredProject, setHoveredProject] = useState(null)
-
+export default function Projects() {
   return (
-    <section id="projects" className="projects">
-      <div className="container">
-        <motion.div
-          className="section-header-alt"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <span className="section-number">02.</span>
-          <h2 className="section-title-alt">coisas que construí</h2>
-        </motion.div>
+    <section className='section projects' id='projects' aria-labelledby='projects-title'>
+      <div className='container'>
+        <SectionHeader
+          id='projects-title'
+          number='02'
+          eyebrow='Projetos'
+          title='Coisas que já construí'
+          description='Cada projeto aqui tem um link público: você pode ver a interface rodando e o código-fonte.'
+        />
 
-        <div className="projects-list">
+        <div className='projects-grid'>
           {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              className="project-item"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
-            >
-              <div className="project-number">
-                <FiCode />
-                <span>0{index + 1}</span>
+            <article className='project-card card' key={project.id}>
+              <div className='project-image'>
+                <img
+                  src={project.image}
+                  alt={`Prévia da interface do projeto ${project.title}`}
+                  width='929'
+                  height='823'
+                  loading='lazy'
+                />
               </div>
 
-              <div className="project-content">
-                <h3 className="project-name">{project.title}</h3>
-                <p className="project-desc">{project.description}</p>
+              <div className='project-body'>
+                <div className='project-meta'>
+                  <span className='project-index'>0{index + 1}</span>
+                  <span>{project.category}</span>
+                </div>
 
-                <div className="project-stack">
+                <h3>{project.title}</h3>
+                <p className='project-description'>{project.description}</p>
+
+                <div className='chip-list project-tags'>
                   {project.tags.map((tag) => (
-                    <span key={tag} className="stack-item">{tag}</span>
+                    <span className='chip' key={tag}>
+                      {tag}
+                    </span>
                   ))}
                 </div>
 
-                <div className="project-actions">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer">
-                    <FiGithub /> código
+                <div className='project-actions'>
+                  <a href={project.demo} target='_blank' rel='noreferrer'>
+                    Ver demo <FaExternalLinkAlt size={13} />
                   </a>
-                  <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                    <FiExternalLink /> ver ao vivo
+                  <a href={project.github} target='_blank' rel='noreferrer'>
+                    <FaGithub size={16} /> Código
                   </a>
                 </div>
               </div>
-
-              <motion.div
-                className="project-visual"
-                animate={{
-                  scale: hoveredProject === project.id ? 1.05 : 1,
-                  opacity: hoveredProject === project.id ? 1 : 0.7
-                }}
-              >
-                <img src={project.image} alt={project.title} />
-              </motion.div>
-            </motion.div>
+            </article>
           ))}
         </div>
       </div>
     </section>
   )
 }
-
-export default Projects

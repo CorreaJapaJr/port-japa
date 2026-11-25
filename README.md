@@ -1,71 +1,58 @@
-# Portfólio Profissional - Front-end Developer
+# Portfólio — Reginaldo Correa
 
-Portfólio moderno e responsivo desenvolvido com React, Vite e Framer Motion.
+Portfólio pessoal de front-end, construído com React + Vite. O projeto é estático, leve e pode ser publicado em qualquer host (GitHub Pages, Vercel, Netlify etc.).
 
-## 🚀 Tecnologias
+## Stack
 
 - React 18
-- Vite
-- Framer Motion (animações)
+- Vite 5
 - React Icons
-- CSS3 com variáveis CSS
+- CSS com custom properties (sem framework de UI)
+- Google Fonts: Space Grotesk (títulos) e Inter (texto)
 
-## 🎨 Características
-
-- ✨ Design moderno com tema dark/light
-- 🎭 Animações fluidas com Framer Motion
-- 📱 Totalmente responsivo (mobile-first)
-- 🎨 Paleta roxa com gradientes e acentos neon
-- 🧭 Navegação suave entre seções
-- 📊 Seções: Hero, Sobre, Skills, Projetos, Experiência, Contato
-- 🔧 Dados centralizados para fácil edição
-
-## 📦 Instalação
+## Rodar localmente
 
 ```bash
-# Instalar dependências
 npm install
-
-# Executar em desenvolvimento
-npm run dev
-
-# Build para produção
-npm run build
+npm run dev      # http://localhost:5173
+npm run build    # gera a pasta dist/
+npm run preview  # serve o build de produção
 ```
 
-## ⚙️ Personalização
-
-Edite o arquivo `src/data.js` para personalizar:
-- Informações pessoais
-- Skills e tecnologias
-- Projetos
-- Experiência profissional
-- Links sociais
-
-## 📝 Estrutura
+## Estrutura
 
 ```
 src/
-├── components/
-│   ├── Navbar.jsx
-│   ├── Hero.jsx
-│   ├── About.jsx
-│   ├── Skills.jsx
-│   ├── Projects.jsx
-│   ├── Experience.jsx
-│   ├── Contact.jsx
-│   └── Footer.jsx
-├── data.js (centralize seus dados aqui)
+├── assets/          imagens usadas no portfólio
+├── components/      Navbar, Hero, About, Projects, Skills, Experience, Contact, Footer
+├── data.js          textos, projetos, skills e links — edite aqui
 ├── App.jsx
-└── index.css
+└── index.css        tokens de cor, tipografia e utilitários
+public/              favicon.svg e robots.txt
 ```
 
-## 🎯 SEO
+## Editar conteúdo
 
-- Meta tags configuradas
-- Open Graph tags
-- Fonte otimizada (Poppins via Google Fonts)
+Tudo que aparece no site está em `src/data.js`:
 
-## 📄 Licença
-Reginaldo da Rosa Correa Junior
-# port-japa
+- `personalInfo`: nome, cargo, localização, e-mail, telefone e redes sociais
+- `skills`: tecnologias, ferramentas e certificações
+- `projects`: cards com print, descrição, tags, link do código e da demo
+- `experience`: linha do tempo
+
+Para adicionar um projeto: coloque a imagem em `src/assets/`, importe no topo de `src/data.js` e inclua um novo objeto em `projects`.
+
+## Publicação
+
+O `vite.config.js` usa `base: './'`, então os caminhos dos assets são relativos. Isso significa que o conteúdo de `dist/` funciona tanto na raiz de um domínio quanto em um caminho como `/port-japa/`.
+
+```bash
+npm run build
+# publique o conteúdo da pasta dist/
+```
+
+## Observações
+
+- Não há formulário falso: o contato usa `mailto:`, telefone e links reais.
+- O overlay de scanlines, a fonte pixelada e o código morto das versões antigas foram removidos.
+- Respeita `prefers-reduced-motion` e tem estados de foco visíveis para navegação por teclado.
